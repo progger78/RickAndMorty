@@ -13,10 +13,21 @@ final class RMCharactersVC: UIViewController {
         super.viewDidLoad()
         title = "Characters"
         view.backgroundColor = .systemBackground
-        // Do any additional setup after loading the view.
+        let request = RMRequest(endPoint: .character, queryParameters:
+        [
+        URLQueryItem(name: "name", value: "rick"),
+        URLQueryItem(name: "status", value: "alive")]
+        )
+        
+        print(request.url)
+        
+        RMService.shared.execute(request, expecting: RMCharacter.self, completion: {
+            result in
+           
+        })
     }
     
-
+    
     /*
     // MARK: - Navigation
 
