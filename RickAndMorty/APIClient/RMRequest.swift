@@ -10,25 +10,34 @@ import Foundation
 
 final class RMRequest{
     
+    private struct Constants {
+        static let baseUrl = "https://rickandmortyapi.com/api"
+    }
+    
     let endPoint: RMEndpoint
     
-    let pathComponents: Set<String>
+    let pathComponents: [String]
     
     let queryParameters: [URLQueryItem]
     
+    public let httpMethod = "GET"
+    
+    
     private var urlString: String {
+        
         var string = Constants.baseUrl
         string += "/"
         string += endPoint.rawValue
+        
+        
         
         if !pathComponents.isEmpty {
             pathComponents.forEach({
                 string += "/\($0)"
             })
-            
         }
         
-        if !queryParameters.isEmpty{
+        if !queryParameters.isEmpty {
             string += "?"
             let argumentString = queryParameters.compactMap({
                 guard let value = $0.value else { return nil }
@@ -36,28 +45,25 @@ final class RMRequest{
             }).joined(separator: "&")
             string += argumentString
         }
+        
         return string
     }
     
-    public let httpMethod = "GET"
-    
-    private struct Constants{
-        static let baseUrl = "https://rickandmortyapi.com/api"
+    init(endPoint: RMEndpoint, pathComponents: [String] = [], queryParameters: [URLQueryItem] = []) {
+        self.endPoint = endPoint
+        self.pathComponents = pathComponents
+        self.queryParameters = queryParameters
     }
     
     
     public var url: URL? {
         return URL(string: urlString)
     }
+
+}
+
+
     
-    // MARK: - public
-    
-    public init(endPoint: RMEndpoint,
-         pathComponents: Set<String> = [],
-         queryParameters: [URLQueryItem] = []
-    ) {
-        self.endPoint = endPoint
-        self.pathComponents = pathComponents
-        self.queryParameters = queryParameters
-    }
+extension RMRequest {
+    static let listCharactersRequests = RMRequest(endPoint: .character)
 }
