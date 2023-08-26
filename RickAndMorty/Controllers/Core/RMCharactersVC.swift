@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class RMCharactersVC: UIViewController {
+final class RMCharactersVC: UIViewController, RMCharactersListViewDelegate {
+    
     
     
     private let charactersListView = RMCharactersListView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        charactersListView.delegate = self
         title = "Characters"
         view.backgroundColor = .systemBackground
         view.addSubview(charactersListView)
@@ -21,6 +23,16 @@ final class RMCharactersVC: UIViewController {
         
     }
     
+    // MARK: - RMCharacterListViewDelegate
+    
+    
+    func rmCharacterListView(_ characterListView: RMCharactersListView, didSelectCharacter character: RMCharacter) {
+        let viewModel = RMCharacterDetailViewViewModel(character: character)
+        let detailVC = RMCharacterDetailVC(viewModel: viewModel)
+        detailVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+
 }
 
 

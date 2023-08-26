@@ -106,7 +106,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         
     }
     
-    public func configure(for viewModel: RMCharactersCollectionViewCellViewModel) {
+    public func configure(with viewModel: RMCharactersCollectionViewCellViewModel) {
         nameLabel.text = viewModel.characterName
         statusLabel.text = viewModel.characterStatusText
         

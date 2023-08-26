@@ -7,14 +7,26 @@
 
 import UIKit
 
-class RMCharacterDetailVC: UIView {
+final class RMCharacterDetailVC: UIViewController {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    private let viewModel: RMCharacterDetailViewViewModel
+    
+    init(viewModel: RMCharacterDetailViewViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    
+        
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        title = viewModel.title
+        
+    }
 }
