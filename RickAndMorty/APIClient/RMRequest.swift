@@ -69,9 +69,17 @@ final class RMRequest{
         if trimmed.contains("/") {
             let components = trimmed.components(separatedBy: "/")
             if !components.isEmpty {
-                let endpointString = components[0]
+                let endpointString = components[0] // Endpoint
+                var pathComponents: [String] = []
+                if components.count > 1 {
+                    pathComponents = components
+                    pathComponents.removeFirst()
+                    
+                }
+                
                 if let rmEndPoint = RMEndpoint(rawValue: endpointString) {
-                    self.init(endPoint: rmEndPoint)
+                    self.init(endPoint: rmEndPoint, pathComponents: pathComponents)
+                    return
                 }
             }
         }
