@@ -73,7 +73,7 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
                 fatalError("Unsupported cell")
             }
             cell.configure(with: viewModel)
-            cell.backgroundColor = .systemPink
+            
             
             return cell
         case .information(let viewModels):
@@ -82,7 +82,7 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
                 fatalError("Unsupported cell")
             }
             cell.configure(with: viewModels[indexPath.row])
-            cell.backgroundColor = .cyan
+            
             return cell
         case .episodes(let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodesCollectionViewCell.cellIdentifier, for: indexPath) as?
@@ -90,7 +90,6 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
                 fatalError("Unsupported cell")
             }
             cell.configure(with: viewModels[indexPath.row])
-            cell.backgroundColor = .systemPurple
             return cell
         }
         

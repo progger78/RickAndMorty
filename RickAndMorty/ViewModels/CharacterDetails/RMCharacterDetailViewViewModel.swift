@@ -16,8 +16,8 @@ final class RMCharacterDetailViewViewModel {
     
     enum SectionType{
         case photo(viewModel: RMCharacterPhotoCollectionViewCellViewModel)
-        case information(viewModel: [RMCharacterInfoCollectionViewCellViewModel])
-        case episodes(viewModel: [RMCharactereEpisodesCollectionViewCellViewModel])
+        case information(viewModels: [RMCharacterInfoCollectionViewCellViewModel])
+        case episodes(viewModels: [RMCharactereEpisodesCollectionViewCellViewModel])
         
     }
     
@@ -28,19 +28,27 @@ final class RMCharacterDetailViewViewModel {
         setUpSections()
         
     }
-    
+   
     private func setUpSections(){
         sections = [
-            .photo(viewModel: .init()),
-            .information(viewModel: [
-                .init(),
-                .init(),
-                .init()
+            .photo(viewModel: .init(imageUrl: URL(string: character.image))),
+            .information(viewModels: [
+                .init(value: character.status.text, type: .status),
+                .init(value: character.gender.rawValue, type: .gender),
+                .init(value: character.species, type: .species),
+                .init(value: character.type, type: .type),
+                .init(value: character.location.name, type: .location),
+                .init(value: character.origin.name, type: .origin),
+                .init(value: character.created, type: .created),
+                .init(value: "\(character.episode.count)", type: .episodesCount),
+                
             ]),
-            .episodes(viewModel: [
-                .init(),
-                .init(),
-                .init()])
+            .episodes(viewModels: character.episode.compactMap({
+                return RMCharactereEpisodesCollectionViewCellViewModel(episodeUrl: URL(string: $0))
+            }
+        )
+    )
+            
         ]
     }
     
@@ -55,7 +63,7 @@ final class RMCharacterDetailViewViewModel {
     public func createPhotoSectionLayout() -> NSCollectionLayoutSection {
         
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 10, trailing: 5)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5)), subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         return section
