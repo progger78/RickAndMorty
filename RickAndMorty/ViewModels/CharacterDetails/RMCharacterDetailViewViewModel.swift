@@ -13,6 +13,9 @@ final class RMCharacterDetailViewViewModel {
     
     private let character: RMCharacter
     
+    public var episode: [String] {
+        character.episode
+    }
     
     enum SectionType{
         case photo(viewModel: RMCharacterPhotoCollectionViewCellViewModel)
