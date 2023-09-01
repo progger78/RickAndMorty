@@ -8,23 +8,22 @@
 import UIKit
 
 final class RMLocationsVC: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Locations"
         view.backgroundColor = .systemBackground
-        // Do any additional setup after loading the view.
+        addSearchButton()
+        
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func addSearchButton(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
     }
-    */
-
+    @objc private func didTapSearch(){
+        let vc = RMSearchVC(config: RMSearchVC.Config(type: .location))
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

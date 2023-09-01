@@ -85,8 +85,8 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
             
             return cell
         case .episodes(let viewModels):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodesCollectionViewCell.cellIdentifier, for: indexPath) as?
-                    RMCharacterEpisodesCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as?
+                    RMCharacterEpisodeCollectionViewCell else {
                 fatalError("Unsupported cell")
             }
             cell.configure(with: viewModels[indexPath.row])

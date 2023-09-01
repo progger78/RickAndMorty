@@ -20,9 +20,20 @@ final class RMCharactersVC: UIViewController, RMCharactersListViewDelegate {
         view.backgroundColor = .systemBackground
         view.addSubview(charactersListView)
         view.topPin(customView: charactersListView, view: view)
+        addSearchButton()
         
+        
+
+      
     }
-    
+  
+    private func addSearchButton(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
+    }
+    @objc private func didTapSearch(){
+        let vc = RMSearchVC(config: RMSearchVC.Config(type: .character))
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - RMCharacterListViewDelegate
     
     

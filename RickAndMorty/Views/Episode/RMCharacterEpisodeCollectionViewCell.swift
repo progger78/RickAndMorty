@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RMCharacterEpisodesCollectionViewCell: UICollectionViewCell {
+class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
     
     
     static let cellIdentifier = "RMCharactereEpisodesCollectionViewCell"
@@ -41,10 +41,10 @@ class RMCharacterEpisodesCollectionViewCell: UICollectionViewCell {
     }
     
     private func createCellStyle() {
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = .tertiarySystemFill
         contentView.layer.cornerRadius = 8
         contentView.layer.borderWidth = 2
-        contentView.layer.borderColor = UIColor.systemTeal.cgColor
+        
     }
     
     
@@ -89,6 +89,7 @@ class RMCharacterEpisodesCollectionViewCell: UICollectionViewCell {
             self?.seasonLabel.text = "Episode \(data.episode)"
             self?.nameLabel.text = "Name: \(data.name)"
             self?.airDateLabel.text = "Aired on: \(data.air_date)"
+            self?.contentView.layer.borderColor = viewModel.borderColor?.cgColor
         }
         viewModel.fetchEpisode()
     }

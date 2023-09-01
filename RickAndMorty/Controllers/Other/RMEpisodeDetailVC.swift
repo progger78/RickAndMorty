@@ -6,15 +6,21 @@
 //
 
 import UIKit
+
 // MARK: VC for displaying episode detais
 class RMEpisodeDetailVC: UIViewController {
     
-    let url: URL?
+    
+    private let viewModel: RMEpisodeDetailViewViewModel
+    
+    private let episodeDetailView = RMEpisodeDetailView()
+
+   
     
     // MARK: - INIT
     
     init(url: URL?) {
-        self.url = url
+        self.viewModel = .init(endpointURL: url)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,10 +32,18 @@ class RMEpisodeDetailVC: UIViewController {
     // MARK: - Lifecycle function
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemTeal
         title = "Episode"
+        view.addSubviews(episodeDetailView)
+        view.topPin(customView: episodeDetailView, view: view)
+        viewModel.fetchEpisodeData()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
         
     }
     
+    @objc
+    func didTapShare() {
+        //        TODO: Add sharing user function
+        
+    }
 
 }
