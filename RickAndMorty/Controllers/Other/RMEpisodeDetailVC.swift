@@ -8,19 +8,20 @@
 import UIKit
 
 // MARK: VC for displaying episode detais
-class RMEpisodeDetailVC: UIViewController {
+class RMEpisodeDetailVC: UIViewController, RMEpisodeDetailViewViewModelDelegate {
+   
     
     
     private let viewModel: RMEpisodeDetailViewViewModel
     
-    private let episodeDetailView = RMEpisodeDetailView()
+    private let detailView = RMEpisodeDetailView()
 
    
     
     // MARK: - INIT
     
     init(url: URL?) {
-        self.viewModel = .init(endpointURL: url)
+        self.viewModel = RMEpisodeDetailViewViewModel(endpointURL: url)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,8 +34,9 @@ class RMEpisodeDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Episode"
-        view.addSubviews(episodeDetailView)
-        view.topPin(customView: episodeDetailView, view: view)
+        view.addSubviews(detailView)
+        view.topPin(customView: detailView, view: view)
+        viewModel.delegate = self
         viewModel.fetchEpisodeData()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
         
@@ -45,5 +47,10 @@ class RMEpisodeDetailVC: UIViewController {
         //        TODO: Add sharing user function
         
     }
+    
+    func didFetchEpisodeDetails() {
+        detailView.configure(with: viewModel)
+    }
+    
 
 }
