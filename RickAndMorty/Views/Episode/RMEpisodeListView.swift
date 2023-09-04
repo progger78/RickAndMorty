@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RMEpisodeListViewDelegate: AnyObject {
-    func rmEpisodeListView(_ episodeListView: RMEpisodeListView, didSelectEpisode: RMEpisode)
+    func rmEpisodeListView(_ episodeListView: RMEpisodeListView, didSelectEpisode episode: RMEpisode)
 }
 ///  View that handles loader, list of ep etc.
 final class RMEpisodeListView: UIView {
@@ -91,7 +91,6 @@ extension RMEpisodeListView: RMEpisodeListViewViewModelDelegate {
     
     
     func didLoadInitialEpisodes() {
-        print("didload")
         spinner.stopAnimating()
         collectionView.isHidden = false
         collectionView.reloadData()

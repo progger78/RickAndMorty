@@ -39,10 +39,11 @@ final class RMEpisodesVC: UIViewController, RMEpisodeListViewDelegate{
     // MARK: - RMEpisodeViewDelegate
     
     
-    func rmEpisodeListView(_ episodeListView: RMEpisodeListView, didSelectEpisode character: RMEpisode) {
+    func rmEpisodeListView(_ episodeListView: RMEpisodeListView, didSelectEpisode episode: RMEpisode) {
        
-        let detailVC = RMEpisodeDetailVC(url: URL(string: character.url) )
+        let detailVC = RMEpisodeDetailVC(url: URL(string: episode.url) )
         detailVC.navigationItem.largeTitleDisplayMode = .never
+        detailVC.title = episode.name
         navigationController?.pushViewController(detailVC, animated: true)
     }
 

@@ -28,8 +28,6 @@ class RMCharacterDetailView: UIView {
         self.collectionView = collectionView
         addSubviews(spinner, collectionView)
         addConstraints()
-        
-        
     }
     
     required init?(coder: NSCoder) {

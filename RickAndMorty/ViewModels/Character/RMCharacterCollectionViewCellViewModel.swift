@@ -10,8 +10,8 @@ import Foundation
 
 /// Single cell for a character
 
-final class RMCharactersCollectionViewCellViewModel: Hashable, Equatable{
-    static func == (lhs: RMCharactersCollectionViewCellViewModel, rhs: RMCharactersCollectionViewCellViewModel) -> Bool {
+final class RMCharacterCollectionViewCellViewModel: Hashable, Equatable{
+    static func == (lhs: RMCharacterCollectionViewCellViewModel, rhs: RMCharacterCollectionViewCellViewModel) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
     

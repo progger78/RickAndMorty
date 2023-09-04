@@ -28,7 +28,6 @@ final class RMService {
         }
         
         if let cachedData = cacheManager.cachedData(for: request.endPoint, url: request.url) {
-            print("reading from cache")
             do {
                 let result = try JSONDecoder().decode(type.self, from: cachedData)
                 completion(.success(result))
