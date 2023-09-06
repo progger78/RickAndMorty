@@ -9,12 +9,13 @@ import UIKit
 
 final class RMLocationsVC: UIViewController {
     
+    let primaryView = RMLocationView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Locations"
-        view.backgroundColor = .systemBackground
-        addSearchButton()
-        
+        view.addSubviews(primaryView)
+        view.topPin(customView: primaryView, view: view)
         
         
     }

@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 
 
-struct RMSettingsCellViewModel {
+struct RMSettingsCellViewModel: Identifiable {
+    
+    let id = UUID()
+    public var onTapHandler: (RMSettingsOptions) -> Void
+    
     public var title: String {
         type.displayTitle
     }
@@ -17,8 +21,13 @@ struct RMSettingsCellViewModel {
         type.displayIcon
     }
     
+    public var iconContainerColor: UIColor {
+        type.iconContainerColor
+    }
+    
     public let type: RMSettingsOptions
-    init(type: RMSettingsOptions) {
+    init(type: RMSettingsOptions, onTapHandler: @escaping(RMSettingsOptions) -> Void) {
         self.type = type
+        self.onTapHandler = onTapHandler
     }
 }
