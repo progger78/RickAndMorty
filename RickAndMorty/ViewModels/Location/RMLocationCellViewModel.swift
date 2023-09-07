@@ -9,7 +9,7 @@ import Foundation
 
 
 
-struct RMLocationTableCellViewModel: Hashable, Equatable {
+struct RMLocationCellViewModel: Hashable, Equatable {
    
     let location: RMLocation
     
@@ -30,7 +30,7 @@ struct RMLocationTableCellViewModel: Hashable, Equatable {
     }
     
     
-    static func == (lhs: RMLocationTableCellViewModel, rhs: RMLocationTableCellViewModel) -> Bool {
+    static func == (lhs: RMLocationCellViewModel, rhs: RMLocationCellViewModel) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
     

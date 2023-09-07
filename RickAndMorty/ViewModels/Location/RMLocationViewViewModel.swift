@@ -15,7 +15,6 @@ protocol RMLocationViewViewModelDelegate: AnyObject {
 
 final class RMLocationViewViewModel {
     
-    
     init(){}
     
     public weak var delegate: RMLocationViewViewModelDelegate?
@@ -23,7 +22,7 @@ final class RMLocationViewViewModel {
     private var locations: [RMLocation] = [] {
         didSet {
             for location in locations {
-                let viewModel = RMLocationTableCellViewModel(location: location)
+                let viewModel = RMLocationCellViewModel(location: location)
                 if !cellViewModels.contains(viewModel) {
                     cellViewModels.append(viewModel)
                 }
@@ -33,9 +32,16 @@ final class RMLocationViewViewModel {
         }
     }
     
+    func location(at index: Int) -> RMLocation? {
+        guard index >= locations.count else {
+            return nil
+        }
+        return locations[index]
+    }
+    
     private var apiInfo: RMGetAllLocationsResponse.Info?
     
-    public private(set) var cellViewModels: [RMLocationTableCellViewModel] = []
+    public private(set) var cellViewModels: [RMLocationCellViewModel] = []
     
     func fetchLocation() {
         RMService.shared.execute(.listLocationsRequest, expecting: RMGetAllLocationsResponse.self) { [weak self] result in

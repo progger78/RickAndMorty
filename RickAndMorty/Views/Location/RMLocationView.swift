@@ -7,7 +7,14 @@
 
 import UIKit
 
+
+protocol RMLocationViewDelegate: AnyObject {
+    func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation)
+}
 final class RMLocationView: UIView {
+    
+    
+    public weak var delegate: RMLocationViewDelegate?
     
     private var viewModel: RMLocationViewViewModel? {
         didSet {
@@ -21,7 +28,7 @@ final class RMLocationView: UIView {
     }
     
     let locationTableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.isHidden = true
         tableView.alpha = 0
@@ -82,6 +89,11 @@ extension RMLocationView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let locationModel = viewModel?.location(at: indexPath.row) else {
+            return
+        }
+        self.delegate?.rmLocationView(self, didSelect: locationModel)
+        
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -98,7 +110,7 @@ extension RMLocationView: UITableViewDelegate, UITableViewDataSource {
             fatalError("not supported cell")
         }
         let viewModel = viewModels[indexPath.row]
-        cell.textLabel?.text = viewModel.name
+        cell.configure(with: viewModel)
         return cell
     }
 }
