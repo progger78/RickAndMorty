@@ -10,6 +10,7 @@ import UIKit
 class RMLocationTableViewCell: UITableViewCell {
 
     static let cellIdentifier = "RMLocationTableViewCell"
+    
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
