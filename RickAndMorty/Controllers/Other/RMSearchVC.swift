@@ -55,7 +55,7 @@ class RMSearchVC: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(searchView)
         view.topPin(customView: searchView, view: view)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapExecuteSearch))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search", style: .done, target: self, action: #selector(didTapExecuteSearch))
         
     }
     

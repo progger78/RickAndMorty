@@ -13,7 +13,7 @@ final class RMSearchView: UIView {
 
     // MARK: - FUNCTIONALITY
     
-    // Search input view(bar, selection, buttons)
+    private let searchInputView = RMSearchInputView()
     
     private let noSearchResultView = RMNoSearchResultsView()
     
@@ -28,8 +28,9 @@ final class RMSearchView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(noSearchResultView)
+        addSubviews(noSearchResultView, searchInputView)
         addConstraint()
+        searchInputView.configure(with: .init(type: viewModel.config.type))
         
     }
     
@@ -45,6 +46,11 @@ final class RMSearchView: UIView {
             noSearchResultView.heightAnchor.constraint(equalToConstant: 150),
             noSearchResultView.centerXAnchor.constraint(equalTo: centerXAnchor),
             noSearchResultView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            searchInputView.topAnchor.constraint(equalTo: topAnchor),
+            searchInputView.rightAnchor.constraint(equalTo: rightAnchor),
+            searchInputView.leftAnchor.constraint(equalTo: leftAnchor),
+            searchInputView.heightAnchor.constraint(equalToConstant: 120)
             
         ])
     }

@@ -174,7 +174,6 @@
 				6313B1F42AA38F000017C101 /* RMEpisodeInfoCollectionViewCell.swift */,
 				6313B1E42AA08FDC0017C101 /* RMEpisodeDetailView.swift */,
 				6313B1E72AA094AF0017C101 /* RMEpisodeListView.swift */,
-				63C0B2A32AAC9F5300B1963A /* RMSearchInputViewViewModel.swift */,
 			);
 			path = Episode;
 			sourceTree = "<group>";
@@ -255,6 +254,7 @@
 		63C0B29C2AAC9C4900B1963A /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				63C0B2A32AAC9F5300B1963A /* RMSearchInputViewViewModel.swift */,
 				63C0B29A2AAC9C3300B1963A /* RMSearchViewViewModel.swift */,
 				63C0B29F2AAC9ED300B1963A /* RMNoResultsSearchViewViewModel.swift */,
 			);
