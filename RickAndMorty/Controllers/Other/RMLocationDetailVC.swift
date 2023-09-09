@@ -33,7 +33,6 @@ class RMLocationDetailVC: UIViewController, RMLocationDetailViewViewModelDelegat
     // MARK: - Lifecycle function
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Episode"
         view.addSubviews(detailView)
         view.topPin(customView: detailView, view: view)
         detailView.delegate = self

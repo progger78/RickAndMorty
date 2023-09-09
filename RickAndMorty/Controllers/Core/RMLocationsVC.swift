@@ -40,6 +40,7 @@ extension RMLocationsVC: RMLocationViewViewModelDelegate, RMLocationViewDelegate
     func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation) {
         let vc = RMLocationDetailVC(location: location)
         vc.navigationItem.largeTitleDisplayMode = .never
+        vc.title = location.name
         navigationController?.pushViewController(vc, animated: true)
     }
     

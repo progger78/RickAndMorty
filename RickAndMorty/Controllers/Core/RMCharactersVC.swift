@@ -32,6 +32,7 @@ final class RMCharactersVC: UIViewController, RMCharactersListViewDelegate {
     }
     @objc private func didTapSearch(){
         let vc = RMSearchVC(config: RMSearchVC.Config(type: .character))
+        vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - RMCharacterListViewDelegate

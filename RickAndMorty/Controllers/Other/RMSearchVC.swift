@@ -6,7 +6,10 @@
 //
 
 import UIKit
-
+// Dynamic results search view
+// Render search results
+// Render no results
+// Searching/Api call
 class RMSearchVC: UIViewController {
 
     required init?(coder: NSCoder) {
@@ -25,6 +28,17 @@ class RMSearchVC: UIViewController {
             case character
             case episodes
             case location
+            
+            var name: String {
+                switch self {
+                case .character:
+                    return "Search characters"
+                case .location:
+                    return "Search locations"
+                case .episodes:
+                    return "Search episodes"
+                }
+            }
         }
         
         let type: `Type`
@@ -33,7 +47,7 @@ class RMSearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Search"
+        title = config.type.name
         view.backgroundColor = .systemBackground
 
 
