@@ -16,10 +16,14 @@ class RMSearchVC: UIViewController {
         fatalError("unsupported")
     }
     
-    public var config: Config
+    private let viewModel: RMSearchViewViewModel
+    
+    private let searchView: RMSearchView
     
     init(config: Config) {
-        self.config = config
+        let viewModel = RMSearchViewViewModel(config: config)
+        self.viewModel = viewModel
+        self.searchView = RMSearchView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -47,11 +51,19 @@ class RMSearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = config.type.name
+        title = viewModel.config.type.name
         view.backgroundColor = .systemBackground
-
-
+        view.addSubview(searchView)
+        view.topPin(customView: searchView, view: view)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapExecuteSearch))
+        
     }
+    
+    @objc
+    private func didTapExecuteSearch() {
+//        viewModel.executeSearch
+    }
+    
     
 
     

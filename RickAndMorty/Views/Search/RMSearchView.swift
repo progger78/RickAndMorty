@@ -11,14 +11,12 @@ import UIKit
 
 final class RMSearchView: UIView {
 
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
     // MARK: - FUNCTIONALITY
     
     // Search input view(bar, selection, buttons)
-    // No results view
+    
+    private let noSearchResultView = RMNoSearchResultsView()
+    
     // Show Search results view
     
     
@@ -28,10 +26,28 @@ final class RMSearchView: UIView {
     init(frame: CGRect, viewModel: RMSearchViewViewModel) {
         self.viewModel = viewModel
         super.init(frame: frame)
-        backgroundColor = .systemTeal
+        backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
+        addSubviews(noSearchResultView)
+        addConstraint()
+        
     }
     
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    
+    private func addConstraint() {
+        NSLayoutConstraint.activate([
+            noSearchResultView.widthAnchor.constraint(equalToConstant: 150),
+            noSearchResultView.heightAnchor.constraint(equalToConstant: 150),
+            noSearchResultView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            noSearchResultView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+        ])
+    }
     
 
 }
