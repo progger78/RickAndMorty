@@ -20,6 +20,8 @@ class RMSearchVC: UIViewController {
     
     private let searchView: RMSearchView
     
+    
+    
     init(config: Config) {
         let viewModel = RMSearchViewViewModel(config: config)
         self.viewModel = viewModel
@@ -48,13 +50,17 @@ class RMSearchVC: UIViewController {
         let type: `Type`
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchView.presentKeyboard()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.config.type.name
         view.backgroundColor = .systemBackground
         view.addSubview(searchView)
         view.topPin(customView: searchView, view: view)
+        searchView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search", style: .done, target: self, action: #selector(didTapExecuteSearch))
         
     }
@@ -63,9 +69,13 @@ class RMSearchVC: UIViewController {
     private func didTapExecuteSearch() {
 //        viewModel.executeSearch
     }
-    
-    
 
-    
+}
 
+extension RMSearchVC: RMSearchViewDelegate {
+    func rmSearchView(_ view: RMSearchView, didSelectOption: RMSearchInputViewViewModel.DynamicOptions) {
+        print("present option selection")
+    }
+    
+    
 }

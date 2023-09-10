@@ -8,9 +8,13 @@
 import UIKit
 
 
+protocol RMSearchViewDelegate: AnyObject {
+    func rmSearchView(_ view: RMSearchView, didSelectOption: RMSearchInputViewViewModel.DynamicOptions)
+}
 
 final class RMSearchView: UIView {
 
+    public weak var delegate: RMSearchViewDelegate?
     // MARK: - FUNCTIONALITY
     
     private let searchInputView = RMSearchInputView()
@@ -28,6 +32,7 @@ final class RMSearchView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
+        searchInputView.delegate = self
         addSubviews(noSearchResultView, searchInputView)
         addConstraint()
         searchInputView.configure(with: .init(type: viewModel.config.type))
@@ -50,12 +55,24 @@ final class RMSearchView: UIView {
             searchInputView.topAnchor.constraint(equalTo: topAnchor),
             searchInputView.rightAnchor.constraint(equalTo: rightAnchor),
             searchInputView.leftAnchor.constraint(equalTo: leftAnchor),
-            searchInputView.heightAnchor.constraint(equalToConstant: 120)
+            searchInputView.heightAnchor.constraint(equalToConstant: viewModel.config.type == .episodes ? 55 : 110)
             
         ])
     }
     
+    public func presentKeyboard() {
+        searchInputView.presentKeyboard()
+    }
+    
 
+}
+
+extension RMSearchView: RMSearchInputViewDelegate {
+    func rmSearchInputView(_ view: RMSearchInputView, didSelectOption option: RMSearchInputViewViewModel.DynamicOptions) {
+        delegate?.rmSearchView(self, didSelectOption: option )
+    }
+    
+    
 }
 
 
