@@ -9,11 +9,13 @@ import UIKit
 import SwiftUI
 
 protocol RMSearchInputViewDelegate: AnyObject {
-    func rmSearchInputView(_ view: RMSearchInputView, didSelectOption option: RMSearchInputViewViewModel.DynamicOptions)
+    func rmSearchInputView(_ view: RMSearchInputView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption)
 }
 final class RMSearchInputView: UIView {
     
     public weak var delegate: RMSearchInputViewDelegate?
+    
+    private var stackView: UIStackView?
     
     private var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -61,7 +63,7 @@ final class RMSearchInputView: UIView {
         return stackView
     }
     
-    private func setOptionButton(option: RMSearchInputViewViewModel.DynamicOptions, tag: Int) -> UIButton {
+    private func setOptionButton(option: RMSearchInputViewViewModel.DynamicOption, tag: Int) -> UIButton {
         let button = UIButton()
         button.setAttributedTitle(NSAttributedString(string: option.rawValue, attributes: [
             .font: UIFont.systemFont(ofSize: 20, weight: .medium),
@@ -77,8 +79,9 @@ final class RMSearchInputView: UIView {
         return button
     }
     
-    private func createOptionSelectionViews(options: [RMSearchInputViewViewModel.DynamicOptions]){
+    private func createOptionSelectionViews(options: [RMSearchInputViewViewModel.DynamicOption]){
         let stackView = setStackView()
+        self.stackView = stackView
         for x in 0..<options.count{
             let option = options[x]
             let button = setOptionButton(option: option, tag: x)
@@ -86,6 +89,20 @@ final class RMSearchInputView: UIView {
         }
     }
     
+    public func update(option: RMSearchInputViewViewModel.DynamicOption, value: String) {
+        guard let buttons = stackView?.arrangedSubviews as? [UIButton],
+              let options = viewModel?.options,
+              let index = options.firstIndex(of: option) else {
+            return
+        }
+        let button = buttons[index]
+        button.setAttributedTitle(NSAttributedString(string: value.uppercased(), attributes: [
+            .font: UIFont.systemFont(ofSize: 20, weight: .medium),
+            .foregroundColor: UIColor.link,
+        ]), for: .normal)
+        
+        
+    }
     @objc
     private func didTapButton(_ sender: UIButton) {
         guard let options = viewModel?.options else {
@@ -93,7 +110,6 @@ final class RMSearchInputView: UIView {
         }
         let tag = sender.tag
         let selected = options[tag]
-        print("Did select \(selected)")
         delegate?.rmSearchInputView(self, didSelectOption: selected)
         
         

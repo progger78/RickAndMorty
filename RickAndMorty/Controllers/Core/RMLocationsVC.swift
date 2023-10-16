@@ -46,7 +46,6 @@ extension RMLocationsVC: RMLocationViewViewModelDelegate, RMLocationViewDelegate
     }
     
     func didFetchLocations() {
-        print("did fetch")
         primaryView.configure(with: viewModel)
     }
 }

@@ -17,10 +17,21 @@ final class RMSearchInputViewViewModel {
         self.type = type
     }
     
-    enum DynamicOptions: String {
+    enum DynamicOption: String {
         case status = "Status"
         case gender = "Gender"
         case locationType = "Location Type"
+        
+        var choices: [String] {
+            switch self {
+            case .status:
+                return ["alive", "dead", "unknown"]
+            case .gender:
+                return ["male", "female", "genderless", "unknown"]
+            case .locationType:
+                return ["cluster", "planet", "microverse"]
+            }
+        }
         
     }
     public var hasDynamicOption: Bool {
@@ -32,7 +43,7 @@ final class RMSearchInputViewViewModel {
         }
     }
     
-    public var options: [DynamicOptions] {
+    public var options: [DynamicOption] {
         switch self.type {
         case .character:
             return [.status, .gender]

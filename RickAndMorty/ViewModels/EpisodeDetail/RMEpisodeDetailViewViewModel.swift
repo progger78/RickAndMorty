@@ -104,10 +104,12 @@ final class RMEpisodeDetailViewViewModel {
                 result in
                 defer {
                     group.leave()
+                    print("done")
                 }
                 switch result {
                 case .success(let model):
                     characters.append(model)
+                    print("\(characters.count)")
                 case .failure(let error):
                     print(String(describing: error))
                 }
@@ -131,7 +133,7 @@ final class RMEpisodeDetailViewViewModel {
     
     public func createCharacterLayout() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0)))
-        item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 10)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 2, trailing: 10)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(250)), subitems: [item, item])
         let section = NSCollectionLayoutSection(group: group)
         return section

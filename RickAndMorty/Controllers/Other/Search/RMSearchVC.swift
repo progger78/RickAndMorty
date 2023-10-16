@@ -10,6 +10,7 @@ import UIKit
 // Render search results
 // Render no results
 // Searching/Api call
+
 class RMSearchVC: UIViewController {
 
     required init?(coder: NSCoder) {
@@ -73,8 +74,16 @@ class RMSearchVC: UIViewController {
 }
 
 extension RMSearchVC: RMSearchViewDelegate {
-    func rmSearchView(_ view: RMSearchView, didSelectOption: RMSearchInputViewViewModel.DynamicOptions) {
-        print("present option selection")
+    func rmSearchView(_ view: RMSearchView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption) {
+        let vc = RMSearchOptionPickerVC(option: option) { [weak self ] selection in
+            DispatchQueue.main.async {
+                self?.viewModel.set(value: selection, for: option)
+            }
+        }
+        vc.sheetPresentationController?.detents = [.medium()]
+        vc.sheetPresentationController?.prefersGrabberVisible = true
+        vc.sheetPresentationController?.preferredCornerRadius = 10
+        present(vc, animated: true)
     }
     
     
