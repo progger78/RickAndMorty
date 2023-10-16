@@ -36,6 +36,13 @@ class RMSearchVC: UIViewController {
             case episodes
             case location
             
+            var endPoint: RMEndpoint {
+                switch self {
+                case .character: return .character
+                case .location: return .location
+                case .episodes: return .episode
+                }
+            }
             var name: String {
                 switch self {
                 case .character:
@@ -68,7 +75,7 @@ class RMSearchVC: UIViewController {
     
     @objc
     private func didTapExecuteSearch() {
-//        viewModel.executeSearch
+        viewModel.executeSearch()
     }
 
 }
